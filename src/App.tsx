@@ -1,57 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Layout } from "./components/Layout";
+import { Routes } from "react-router-dom";
+import { Route } from "react-router";
+import { Catalog } from "./pages/Catalog";
+import { Cart } from "./pages/Cart";
+import { About } from "./pages/About";
+import { Contacts } from "./pages/Contacts";
+import { HomePage } from "./pages/HomePage";
+import { Page404 } from "./pages/Page404";
+import { ProductPage } from "./pages/ProductPage";
+
+// Добавить счетчик инк дек на ProductPage по клику
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<About />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="catalog" element={<Catalog />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route path="products/:id" element={<ProductPage/>}/>
+          <Route path="*" element={<Page404 />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
