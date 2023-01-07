@@ -10,9 +10,6 @@ import { HomePage } from "./pages/HomePage";
 import { Page404 } from "./pages/Page404";
 import { ProductPage } from "./pages/ProductPage";
 
-// Добавить счетчик инк дек на ProductPage по клику
-
-
 function App() {
   return (
     <>
