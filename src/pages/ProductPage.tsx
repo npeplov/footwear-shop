@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { useGetProductItemQuery } from "../features/product/productAPI";
 import { useEffect, useState } from "react";
 import { addproduct } from "../features/cart/cartSlice";
+import { IProduct } from "../modules/IProduct";
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -12,8 +13,16 @@ export const ProductPage = () => {
   const [sizeSelected, setSizeSelected] = useState("");
   const { cart } = useAppSelector((state) => state.cart);
 
-  const addToCart = () => {
-    dispatch(addproduct({ quantity, id: Number(id), size: sizeSelected }));
+  const addToCart = (product: IProduct) => {
+    dispatch(
+      addproduct({
+        id: product.id,
+        title: product.title,
+        size: sizeSelected,
+        quantity,
+        price: product.price,
+      })
+    );
   };
   const handleSizeSelect = (size: string) => {
     setSizeSelected(size);
@@ -70,11 +79,11 @@ export const ProductPage = () => {
             <div className="row">
               <div className="col">Размеры в наличии:</div>
               <div className="pagination col">
-                {product.sizes.map((size) =>
+                {product.sizes.map((size, ind) =>
                   size.avalible ? (
                     <span
                       onClick={() => handleSizeSelect(size.size)}
-                      key={size.size}
+                      key={ind}
                       className={
                         sizeSelected === size.size
                           ? "page-link active"
@@ -117,7 +126,12 @@ export const ProductPage = () => {
             </div>
             <div>{product.price * quantity} ₽</div>
             <div className="d-grid gap-2">
-              <button className="btn btn-danger" onClick={addToCart}>
+              <button
+                className={
+                  sizeSelected ? "btn btn-danger " : "btn btn-danger disabled"
+                }
+                onClick={() => addToCart(product)}
+              >
                 В корзину
               </button>
             </div>
@@ -125,5 +139,15 @@ export const ProductPage = () => {
         </div>
       </div>
     );
-  else return <>Error</>;
+  else
+    return (
+      <>
+        <div className="preloader">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </>
+    );
 };

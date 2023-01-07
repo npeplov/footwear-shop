@@ -1,8 +1,6 @@
 import { CatalogComponent } from "../components/CatalogComponent";
 import { productAPI } from "../features/product/productAPI";
 
-// как передать параметр категории для вывода в компонент
-
 export const Catalog: React.FC = () => {
   return (
     <div className="container">
@@ -11,7 +9,9 @@ export const Catalog: React.FC = () => {
           <section className="catalog">
             <div className="row">
               <h1>Каталог</h1>
-              <CatalogComponent useQuery={productAPI.useGetAllProductsQuery}/>
+              <CatalogComponent
+                useQuery={productAPI.useGetOffsetProductsQuery}
+              />
             </div>
           </section>
         </div>

@@ -1,11 +1,15 @@
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../app/hooks";
+import { removeproduct } from "../features/cart/cartSlice";
 
 export const Cart = () => {
-  // 1. получить остальные поля из query или записать их в стор на странице товара
-  // 2. при обновлении страницы очищается. нужен локал сторадж
-  const {cart} = useAppSelector(state=>state.cart)
+  const { cart } = useAppSelector((state) => state.cart);
   console.log(cart);
-  
+  const dispatch = useDispatch();
+  const handleRemove = (id: number) => {
+    dispatch(removeproduct(id));
+  };
+
   return (
     <div className="row">
       <div className="col">
@@ -23,17 +27,31 @@ export const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {cart.map(item=>
+            {cart.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.title}</td>
+                <td>{item.size}</td>
+                <td>{item.quantity}</td>
+                <td>{item.price}</td>
+                <td>{item.price * item.quantity}</td>
+                <td>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => handleRemove(item.id)}
+                  >
+                    Удалить
+                  </button>
+                </td>
+              </tr>
+            ))}
             <tr>
-              <td>{item.id}</td>
-              <td></td>
-              <td>{item.size}</td>
-              <td>{item.quantity}</td>
-              <td></td>
-              <td></td>
+              <td colSpan={5} className="text-end">
+                Total
+              </td>
+              <td>{cart.reduce((sum, item)=> sum + item.price * item.quantity, 0)}</td>
               <td></td>
             </tr>
-            )}
           </tbody>
         </table>
       </div>

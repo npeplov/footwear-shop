@@ -1,7 +1,8 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../app/hooks";
 
 export const Header = () => {
+  const { cart } = useAppSelector((state) => state.cart);
   return (
     <header className="container">
       <div className="row">
@@ -23,7 +24,7 @@ export const Header = () => {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
                     <NavLink className="nav-link" to="/">
                       Главная
@@ -44,12 +45,16 @@ export const Header = () => {
                       Контакты
                     </NavLink>
                   </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to="/cart">
-                      Корзина товаров
-                    </NavLink>
-                  </li>
+                  <li className="nav-item"></li>
                 </ul>
+                <div className="d-flex">
+                  <NavLink className="nav-link position-relative" to="/cart">
+                    Корзина
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {cart.length ? cart.length : null}
+                    </span>
+                  </NavLink>
+                </div>
               </div>
             </div>
           </nav>
