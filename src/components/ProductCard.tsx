@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { IProduct } from "../modules/IProduct";
+import { IProduct } from "../models/IProduct";
 
 interface IProps {
   product: IProduct
@@ -7,9 +7,9 @@ interface IProps {
 
 export const ProductCard = ({product}: IProps) => {
   return (
-    <div className="col-4" key={product.id}>
+    <div className="col-4">
       <div className="card h-100 flex-row align-content-between flex-wrap">
-        <NavLink to={`products/${product.id}`}>
+        <NavLink to={`/products/${product.id}`}>
           <img
             className="img-fluid card-img-top"
             src={product.images[0]}
@@ -20,7 +20,7 @@ export const ProductCard = ({product}: IProps) => {
           <p className="card-text">{product.title}</p>
           <p className="card-text">{product.price} ₽</p>
           <NavLink
-            to={`products/${product.id}`}
+            to={`/products/${product.id}`}
             className="btn btn-outline-primary"
           >
             Заказать

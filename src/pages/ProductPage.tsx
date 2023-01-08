@@ -1,17 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { useGetProductItemQuery } from "../features/product/productAPI";
-import { useEffect, useState } from "react";
+import { useAppDispatch } from "../app/hooks";
+import { productAPI } from "../features/product/productAPI";
+import { useState } from "react";
 import { addproduct } from "../features/cart/cartSlice";
-import { IProduct } from "../modules/IProduct";
+import { IProduct } from "../models/IProduct";
 
 export const ProductPage = () => {
   const { id } = useParams();
-  const { data: product } = useGetProductItemQuery(id);
+  const { data: product } = productAPI.useGetProductItemQuery(id);
   const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(1);
   const [sizeSelected, setSizeSelected] = useState("");
-  const { cart } = useAppSelector((state) => state.cart);
 
   const addToCart = (product: IProduct) => {
     dispatch(
@@ -27,10 +26,6 @@ export const ProductPage = () => {
   const handleSizeSelect = (size: string) => {
     setSizeSelected(size);
   };
-
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
 
   if (product)
     return (

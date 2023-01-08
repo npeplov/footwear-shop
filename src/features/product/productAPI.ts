@@ -1,26 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IProduct } from '../../modules/IProduct'
+import { IProduct } from '../../models/IProduct'
+
+type ProductResponse = IProduct[]
+
+interface ProductOptions {
+  categoryId?: string;
+  offset?: string;
+}
 
 export const productAPI = createApi({
   reducerPath: 'productAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:7070/api' }),
   tagTypes: ['IProduct'],
   endpoints: (build) => ({
-    getAllProducts: build.query<IProduct[], string>({
-      query: (categoryId) => ({
+    getProducts: build.query<ProductResponse, ProductOptions>({
+      query: ({ categoryId, offset }) => ({
         url: '/items',
         params: {
-          categoryId
+          categoryId,
+          offset,
         },
         providesTags: ['IProduct'],
-      })
-    }),
-    getOffsetProducts: build.query({
-      query: (offset) => ({
-        url: '/items',
-        params: {
-          offset
-        }
       })
     }),
     getTopSales: build.query({
@@ -44,4 +44,4 @@ export const productAPI = createApi({
   })
 })
 
-export const {useGetCategoriesQuery, useGetAllProductsQuery, useGetOffsetProductsQuery, useGetTopSalesQuery, useGetProductItemQuery} = productAPI
+export const { useGetCategoriesQuery, useGetProductsQuery, useGetTopSalesQuery, useGetProductItemQuery } = productAPI

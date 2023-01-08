@@ -4,7 +4,6 @@ import { removeproduct } from "../features/cart/cartSlice";
 
 export const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);
-  console.log(cart);
   const dispatch = useDispatch();
   const handleRemove = (id: number) => {
     dispatch(removeproduct(id));

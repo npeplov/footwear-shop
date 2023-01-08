@@ -1,59 +1,59 @@
-import { useGetAllProductsQuery } from "../features/product/productAPI";
-import { IProduct } from "../modules/IProduct";
+import { productAPI } from "../features/product/productAPI";
+import { IProduct } from "../models/IProduct";
 import { ProductCard } from "./ProductCard";
 import { useState } from "react";
 import { Categories } from "./Categories";
 
-interface IUseQuery {
-  useQuery: typeof useGetAllProductsQuery;
-  offset?: string;
-}
-
-export const CatalogComponent: React.FC<IUseQuery> = ({ useQuery }) => {
+export const CatalogComponent: React.FC = () => {
   const [offset, setOffset] = useState("0");
-
-  const { data: products } = useQuery(offset);
+  const [categoryId, setCategoryId]=useState("")
+  const { data: products } = productAPI.useGetProductsQuery({categoryId, offset})
   const handleLoadMore = () => {
     setOffset(`${Number(offset) + 6}`);
   };
 
-  console.log(products);
+  const handleCategoryClick = (response: string) => {
+    setCategoryId(response);
+    setOffset("0")
+  }
 
   if (products)
     return (
       <div className="container">
         <div className="row">
           <div className="col">
-            <Categories />
+            <Categories onClick={handleCategoryClick} />
             <section className="catalog">
               <div className="row">
                 {products &&
                   products.map((product: IProduct) => (
-                    <ProductCard product={product} />
+                    <ProductCard key={product.id} product={product} />
                   ))}
               </div>
             </section>
           </div>
         </div>
         <div className="my-3 text-center">
+          {products.length === 6 ? 
           <button
             className="btn btn-outline-primary"
             onClick={() => handleLoadMore()}
           >
             Загрузить еще
           </button>
+          : null}
         </div>
       </div>
     );
   else
     return (
       <>
-        {/* <div className="preloader">
+        <div className="preloader">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-        </div> */}
+        </div>
       </>
     );
 };

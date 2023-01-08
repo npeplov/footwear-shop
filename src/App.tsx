@@ -11,15 +11,10 @@ import { HomePage } from "./pages/HomePage";
 import { Page404 } from "./pages/Page404";
 import { ProductPage } from "./pages/ProductPage";
 
-// загрузить 6 некст кнопка
-// Если сервер вернул пустой массив или меньше 6 элементов, то кнопка «Загрузить ещё» должна исчезнуть. 
-// На время загрузки над кнопкой также показывается лоадер, сама кнопка отключается.
-
 // кнопка выбора категории
 
 // иконка корзины file:///C:/react/test/ra16-diploma-master/html/img/header-controls-sprite.png
 // в футере ссылки
-// удалить counter
 // форма заказа в корзине
 // бейдж ci\cd
 

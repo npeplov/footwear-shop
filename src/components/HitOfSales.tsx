@@ -1,14 +1,9 @@
-import { useGetAllProductsQuery } from "../features/product/productAPI";
-import { IProduct } from "../modules/IProduct";
+import { IProduct } from "../models/IProduct";
 import { ProductCard } from "./ProductCard";
+import { productAPI } from "../features/product/productAPI";
 
-interface IUseQuery {
-  useQuery: typeof useGetAllProductsQuery;
-  offset?: string;
-}
-
-export const HitOfSales: React.FC<IUseQuery> = ({ useQuery }) => {
-  const { data: products } = useQuery("");
+export const HitOfSales = () => {
+  const { data: products } = productAPI.useGetTopSalesQuery("");
 
   if (products)
     return (
@@ -19,7 +14,7 @@ export const HitOfSales: React.FC<IUseQuery> = ({ useQuery }) => {
               <div className="row">
                 {products &&
                   products.map((product: IProduct) => (
-                    <ProductCard product = {product}/>
+                    <ProductCard key={product.id} product={product} />
                   ))}
               </div>
             </section>
@@ -30,12 +25,12 @@ export const HitOfSales: React.FC<IUseQuery> = ({ useQuery }) => {
   else
     return (
       <>
-        {/* <div className="preloader">
+        <div className="preloader">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-        </div> */}
+        </div>
       </>
     );
 };
