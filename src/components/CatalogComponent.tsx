@@ -3,6 +3,7 @@ import { IProduct } from "../models/IProduct";
 import { ProductCard } from "./ProductCard";
 import { useState } from "react";
 import { Categories } from "./Categories";
+import Button from "react-bootstrap/esm/Button";
 
 export const CatalogComponent: React.FC = () => {
   const [offset, setOffset] = useState("0");
@@ -35,12 +36,12 @@ export const CatalogComponent: React.FC = () => {
         </div>
         <div className="my-3 text-center">
           {products.length === 6 ? 
-          <button
-            className="btn btn-outline-primary"
+          <Button
+            variant="btn btn-outline-primary"
             onClick={() => handleLoadMore()}
           >
             Загрузить еще
-          </button>
+          </Button>
           : null}
         </div>
       </div>

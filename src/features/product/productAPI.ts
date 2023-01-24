@@ -10,7 +10,7 @@ interface ProductOptions {
 
 export const productAPI = createApi({
   reducerPath: 'productAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:7070/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_BASE_URL}/api` }),
   tagTypes: ['IProduct'],
   endpoints: (build) => ({
     getProducts: build.query<ProductResponse, ProductOptions>({

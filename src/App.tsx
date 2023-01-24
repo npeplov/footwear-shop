@@ -11,8 +11,6 @@ import { HomePage } from "./pages/HomePage";
 import { Page404 } from "./pages/Page404";
 import { ProductPage } from "./pages/ProductPage";
 
-// кнопка выбора категории
-
 // иконка корзины file:///C:/react/test/ra16-diploma-master/html/img/header-controls-sprite.png
 // в футере ссылки
 // форма заказа в корзине

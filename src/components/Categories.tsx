@@ -12,14 +12,11 @@ export const Categories = ({ onClick }: Props ) => {
     return (
       <div>
         <ul className="catalog-categories nav justify-content-center">
-          <li className="nav-item" onClick={() => onClick("")}>
-            <span className="nav-link">Все</span>
-          </li>
-          {categories.map((category: ICategory) => (
-            <li className="nav-item" key={category.id} onClick={() => onClick(category.id)}>
-              <span className="nav-link">
+          {[{id: "", title: "Все"}, ...categories].map((category: ICategory) => (
+            <li className="nav-item " key={category.id} onClick={() => onClick(category.id)}>
+              <a href="#" className="nav-link">
                 {category.title}
-              </span>
+              </a>
             </li>
           ))}
         </ul>

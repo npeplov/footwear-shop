@@ -1,3 +1,4 @@
+import Button from "react-bootstrap/esm/Button";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../app/hooks";
 import { removeproduct } from "../features/cart/cartSlice";
@@ -35,18 +36,18 @@ export const Cart = () => {
                 <td>{item.price}</td>
                 <td>{item.price * item.quantity}</td>
                 <td>
-                  <button
-                    className="btn btn-outline-danger"
+                  <Button
+                    variant="btn btn-outline-danger"
                     onClick={() => handleRemove(item.id)}
                   >
                     Удалить
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
             <tr>
               <td colSpan={5} className="text-end">
-                Total
+                Итого
               </td>
               <td>{cart.reduce((sum, item)=> sum + item.price * item.quantity, 0)}</td>
               <td></td>

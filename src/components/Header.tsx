@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
+import { Button } from "react-bootstrap";
+import { Logo } from "../components/Logo";
 
 export const Header = () => {
   const { cart } = useAppSelector((state) => state.cart);
@@ -10,9 +12,9 @@ export const Header = () => {
           <nav className="navbar navbar-expand-md bg-light">
             <div className="container-fluid">
               <a className="navbar-brand" href="\">
-                ЛогоМагаза
+                <Logo />
               </a>
-              <button
+              <Button
                 className="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
@@ -22,7 +24,7 @@ export const Header = () => {
                 aria-label="Toggle navigation"
               >
                 <span className="navbar-toggler-icon"></span>
-              </button>
+              </Button>
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
@@ -51,7 +53,9 @@ export const Header = () => {
                   <NavLink className="nav-link position-relative" to="/cart">
                     Корзина
                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      {cart.length ? cart.length : null}
+                      {cart.length
+                        ? cart.reduce((acc, item) => acc + item.quantity, 0)
+                        : null}
                     </span>
                   </NavLink>
                 </div>

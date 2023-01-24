@@ -4,6 +4,7 @@ import { productAPI } from "../features/product/productAPI";
 import { useState } from "react";
 import { addproduct } from "../features/cart/cartSlice";
 import { IProduct } from "../models/IProduct";
+import Button from "react-bootstrap/esm/Button";
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -104,31 +105,31 @@ export const ProductPage = () => {
                 role="group"
                 aria-label="Basic example"
               >
-                <button
+                <Button
                   onClick={() => setQuantity((prev) => prev - 1)}
-                  className="btn btn-secondary"
+                  variant="btn btn-secondary"
                 >
                   ─
-                </button>
+                </Button>
                 <span className="btn btn-outline-primary">{quantity}</span>
-                <button
+                <Button
                   onClick={() => setQuantity((prev) => prev + 1)}
-                  className="btn btn-secondary"
+                  variant="btn btn-secondary"
                 >
                   +
-                </button>
+                </Button>
               </div>
             </div>
             <div>{product.price * quantity} ₽</div>
             <div className="d-grid gap-2">
-              <button
-                className={
+              <Button
+                variant={
                   sizeSelected ? "btn btn-danger " : "btn btn-danger disabled"
                 }
                 onClick={() => addToCart(product)}
               >
                 В корзину
-              </button>
+              </Button>
             </div>
           </div>
         </div>
