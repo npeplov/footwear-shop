@@ -1,7 +1,7 @@
 Стек: 
 - React
 - Redux Toolkit, RTK Query
-- TypeSctipt
+- TypeScript
 - Bootstrap
 
 Запуск Frontend:
