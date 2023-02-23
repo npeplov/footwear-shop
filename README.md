@@ -2,6 +2,7 @@
 - React
 - Redux Toolkit, RTK Query
 - TypeSctipt
+- Bootstrap
 
 Запуск Frontend:
 ```
