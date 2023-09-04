@@ -1,4 +1,4 @@
-name: React app deployment
+name: React app deployments
 
 on:
   push:
