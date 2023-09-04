@@ -1,5 +1,6 @@
 {
   "name": "footwear-shop",
+  "homepage": "/footwear-shop/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
